@@ -9,13 +9,14 @@ readme = "README.md"
 requires-python = ">=3.12,<4.0"
 dependencies = [
     "fastapi[standard] (>=0.115.12,<0.116.0)",
-    "sqlalchemy (>=2.0.41,<3.0.0)",
+    "sqlalchemy[asyncio] (>=2.0.41,<3.0.0)",
     "pytest (>=8.4.0,<9.0.0)",
     "pydantic-settings (>=2.9.1,<3.0.0)",
     "alembic (>=1.16.2,<2.0.0)",
     "pwdlib[argon2] (>=0.2.1,<0.3.0)",
     "tzdata (>=2025.2,<2026.0)",
-    "pyjwt (>=2.10.1,<3.0.0)"
+    "pyjwt (>=2.10.1,<3.0.0)",
+    "aiosqlite (>=0.21.0,<0.22.0)"
 ]
 
 [build-system]
@@ -27,10 +28,12 @@ ruff = "^0.11.13"
 pytest = "^8.4.0"
 pytest-cov = "^6.2.1"
 taskipy = "^1.14.1"
+pytest-asyncio = "^1.0.0"
 
 [tool.ruff]
 line-length = 79
 extend-exclude = ['migrations']
+ignore = ['ANN']
 
 [tool.ruff.lint]
 preview = true
@@ -43,6 +46,7 @@ quote-style = 'single'
 [tool.pytest.ini_options]
 pythonpath = "."
 addopts = '-p no:warnings'
+asyncio_default_fixture_loop_scope = 'function'
 
 [tool.taskipy.tasks]
 lint = 'ruff check'
